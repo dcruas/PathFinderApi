@@ -7,30 +7,35 @@ import (
 )
 
 func CheckOutcome(totalRoll int, dc int) skillcheckenum.AbilityCheckResultsType {
-	if totalRoll >= dc+10 {
-		return skillcheckenum.CriticalSuccess
-	} else if totalRoll >= dc {
-		return skillcheckenum.Success
-	} else if totalRoll > dc-10 {
-		return skillcheckenum.Failure
-	}
 
-	return skillcheckenum.CriticalFailure
+	switch true {
+	case totalRoll >= dc+10:
+		return skillcheckenum.CriticalSuccess
+	case totalRoll >= dc:
+		return skillcheckenum.Success
+	case totalRoll > dc-10:
+		return skillcheckenum.Failure
+	default:
+		return skillcheckenum.CriticalFailure
+	}
 }
 
 func AdjustDegree(outcome skillcheckenum.AbilityCheckResultsType, roll int) skillcheckenum.AbilityCheckResultsType {
-	if roll == 1 && outcome > skillcheckenum.CriticalFailure {
-		return outcome - 1
-	} else if roll == 20 && outcome < skillcheckenum.CriticalSuccess {
-		return outcome + 1
-	}
 
-	return outcome
+	switch true {
+	case roll == 1 && outcome > skillcheckenum.CriticalFailure:
+		return outcome - 1
+	case roll == 20 && outcome < skillcheckenum.CriticalSuccess:
+		return outcome + 1
+	default:
+		return outcome
+	}
 }
 
 func CalculateOutcomes(roll int, modifier int, dc int, results skillcheckres.SkillCheckOutcomesResponse) skillcheckres.SkillCheckOutcomesResponse {
 	outcome := CheckOutcome(roll+modifier, dc)
 	check := AdjustDegree(outcome, roll)
+
 	switch check {
 	case skillcheckenum.CriticalFailure:
 		results.CriticalFailures++
