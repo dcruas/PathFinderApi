@@ -30,7 +30,7 @@ An API for calculating the possible outcomes of dice rolls in Pathfinder 2E base
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/pathfinder-api.git
+   git clone https://github.com/dcruas/pathfinder-api.git
    cd pathfinder-api
    ```
 
