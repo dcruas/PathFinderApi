@@ -28,13 +28,13 @@ func GetCheckStatics(c *gin.Context) {
 		return
 	}
 
-	if dc < -100 || dc > 100 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid DC value, please enter a valid value between -100 and 100"})
+	if dc < -999 || dc > 999 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid DC value, please enter a valid value between -999 and 999"})
 		return
 	}
 
-	if modifier < -100 || modifier > 100 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Modifier value, please enter a value between -100 and 100"})
+	if modifier < -999 || modifier > 999 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Modifier value, please enter a value between -999 and 999"})
 		return
 	}
 
